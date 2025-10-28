@@ -6,7 +6,7 @@ import { ApiResponse } from "../utils/ApiResponse.js"
 
 const generateAccessAndRefreshToken = async (userId) =>{
     try {
-        const user = User.findById(userId)
+        const user = await User.findById(userId)
         const accessToken = user.generateAccessToken()
         const refreshToken = user.generateRefreshToken()
     
@@ -15,7 +15,7 @@ const generateAccessAndRefreshToken = async (userId) =>{
     
         return { accessToken, refreshToken }
     } catch (error) {
-        throw new ApiError(500, "Something went wrong while generating referesh and access token")
+        throw new ApiError(500, error.message || "Something went wrong while generating referesh and access token")
     }
 }
 
