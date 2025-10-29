@@ -10,8 +10,8 @@ const generateAccessAndRefreshToken = async (userId) =>{
         const accessToken = user.generateAccessToken()
         const refreshToken = user.generateRefreshToken()
         
-        // console.log("refreshToken", refreshToken);
-        // console.log("accessToken", accessToken);
+        // console.log("Refresh Token: ", refreshToken);
+        // console.log("Access Token: ", accessToken);
         
         user.refreshToken = refreshToken
         await user.save({validateBeforeSave: false})
@@ -150,6 +150,11 @@ const logoutUser = asyncHandler(async (req, res, next)=>{
     .clearCookie("refreshToken", options)
     .json(new ApiResponse(200, {}, "Logout successfully"))
 })
+
+const refreshAccessToken = asyncHandler(async (res,req)=>{
+    User.findById()
+})
+
 
 export  {
     registerUser, 
